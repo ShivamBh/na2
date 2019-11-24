@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 
-export const userSchema = new mongoose.Schema({
+export const UserSchema = new mongoose.Schema({
   // javascript native types, not ts types
   name: String,
   password: String,
@@ -20,4 +20,10 @@ export const userSchema = new mongoose.Schema({
       default: Date.now(),
     },
   },
+});
+
+UserSchema.pre('save', async function(next: mongoose.HookedNextFunction) {
+  try {
+
+  }
 });
