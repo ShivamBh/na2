@@ -11,7 +11,7 @@ interface Address {
 
 export interface User extends Document {
   // here use typescript types
-  name: string;
+  username: string;
   readonly password: string;
   seller: boolean;
   address: Address;
