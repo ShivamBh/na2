@@ -13,7 +13,7 @@ export class UserService {
 
   sanitizeUser(user: User) {
     const { _id, seller, created, username } = user;
-
+    console.log('new created', user);
     return {
       id: _id,
       seller,
@@ -22,8 +22,13 @@ export class UserService {
     };
   }
 
+  async findAll() {
+    return await this.userModel.find();
+  }
+
   async create(userDTO: RegisterDTO) {
     const { username } = userDTO;
+    console.log('DTO from create', userDTO);
     const user = await this.userModel.findOne({ username });
     if (user) {
       throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);

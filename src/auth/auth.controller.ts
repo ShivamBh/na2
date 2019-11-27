@@ -4,6 +4,8 @@ import { LoginDTO, RegisterDTO } from './auth.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { Payload } from '../types/payload';
+import { User } from '../utilities/user.decorator';
+import { SellerGuard } from '../guards/seller.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -13,9 +15,10 @@ export class AuthController {
   ) {}
 
   @Get()
-  @UseGuards(AuthGuard('jwt'))
-  tempAuth() {
-    return { auth: 'works' };
+  @UseGuards(AuthGuard('jwt'), SellerGuard)
+  async findAll(@User() authTest: any) {
+    console.log('from decorator', authTest);
+    return await this.userService.findAll();
   }
 
   @Post('login')
@@ -34,6 +37,7 @@ export class AuthController {
 
   @Post('register')
   async register(@Body() userDTO: RegisterDTO) {
+    console.log('userDTO Register', userDTO);
     const user = await this.userService.create(userDTO);
     const payload: Payload = {
       username: user.username,
