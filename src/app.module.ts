@@ -6,18 +6,24 @@ import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { APP_FILTER } from '@nestjs/core';
 import { HttpExceptionFilter } from './shared/http-exception.filter';
+import { ProductModule } from './product/product.module';
 
-const connectionString = process.env.MONGO_URI;
+let connectionString: string = '';
+
+if (process.env.NODE_ENV == 'test') {
+  connectionString = process.env.MONGO_URI_TEST;
+} else {
+  connectionString = process.env.MONGO_URI;
+}
 
 @Module({
-  imports: [MongooseModule.forRoot(connectionString), SharedModule, AuthModule],
-  controllers: [AppController],
-  providers: [
-    AppService,
-    {
-      provide: APP_FILTER,
-      useClass: HttpExceptionFilter,
-    },
+  imports: [
+    MongooseModule.forRoot(connectionString),
+    SharedModule,
+    AuthModule,
+    ProductModule,
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

@@ -17,7 +17,6 @@ export class AuthController {
   @Get()
   @UseGuards(AuthGuard('jwt'), SellerGuard)
   async findAll(@User() authTest: any) {
-    console.log('from decorator', authTest);
     return await this.userService.findAll();
   }
 
@@ -37,7 +36,6 @@ export class AuthController {
 
   @Post('register')
   async register(@Body() userDTO: RegisterDTO) {
-    console.log('userDTO Register', userDTO);
     const user = await this.userService.create(userDTO);
     const payload: Payload = {
       username: user.username,
