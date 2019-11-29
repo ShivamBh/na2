@@ -15,12 +15,12 @@ async function bootstrap() {
     .setTitle('ECom Nest w/Testing')
     .setDescription('Ecom Test Api Docs')
     .setVersion('1.0')
-    .addTag('ecommerce test')
+    // .addTag('ecommerce test')
     .setBasePath('api')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('docs', app, document);
-  app.setGlobalPrefix('api');
+  // app.setGlobalPrefix('/v1/api');
   await app.listen(3000);
 }
 bootstrap();
