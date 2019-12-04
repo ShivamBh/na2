@@ -15,7 +15,7 @@ async function bootstrap() {
     .setTitle('ECom Nest w/Testing')
     .setDescription('Ecom Test Api Docs')
     .setVersion('1.0')
-    .addTag('ecommerce test')
+    // .addTag('ecommerce test')
     .setBasePath('api')
     .build();
   const document = SwaggerModule.createDocument(app, options);
