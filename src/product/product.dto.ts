@@ -14,4 +14,5 @@ export class CreateProductDTO {
   price: number;
 }
 
+
 export type UpdateProductDTO = Partial<CreateProductDTO>;
