@@ -1,3 +1,3 @@
-export interface {
+export default class {
   test?: number;
 }
